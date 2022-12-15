@@ -14,7 +14,16 @@ import Dog from '../images/dog.png';
 
 import { fetchCards } from './cards';
 
-import { initdb, getDb, postDb } from './database';
+import { initdb, getDb, postDb, deleteDb } from './database';
+
+
+window.deleteCard= (e)=>{
+  let id= parseInt(e.id);
+   //delete the card
+   deleteDb(id);
+   //reload the DOM
+   fetchCards();
+};
 
 window.addEventListener('load', function () {
     initdb();
@@ -23,3 +32,4 @@ window.addEventListener('load', function () {
     document.getElementById('bearThumbnail').src = Bear;
     document.getElementById('dogThumbnail').src = Dog;
   });
+
