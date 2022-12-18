@@ -15,7 +15,7 @@ export const initdb = async () => {
       console.log('contacts store created');
     }
   })
-}
+};
 
 //export a function we will use to get to tht database
 export const getDb = async()=>{
@@ -76,4 +76,16 @@ export const deleteDb = async (id) => {
   const result = await request;
   console.log('result.value', result);
   return result?.value;
+};
+
+export const editDb = async (id, name, phone , profile) => {
+   console.log('PUT to the database');
+
+   const contactDB=await openDB('contact_db',1);
+   const tx=contactDB.transaction("contacts","readwrite");
+   const store=tx.objectStore('contacts');
+
+   const request=store.put({id:id, name: name, email:email, phone:phone, profile: profile});
+   const result=await request;
+   console.log('🚀 - data saved to the database', result)
 };
